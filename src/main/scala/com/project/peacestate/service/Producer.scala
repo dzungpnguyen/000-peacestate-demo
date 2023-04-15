@@ -1,8 +1,7 @@
 package com.project.peacestate.service
 
 import java.util.Properties
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord, ProducerConfig}
-import org.apache.kafka.common.serialization.StringSerializer
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import com.project.peacestate.model.DroneReport
 import com.project.peacestate.utility.Utils
 
@@ -12,11 +11,11 @@ object Producer {
     val brokers = "localhost:9092"
     val scalaMap: Map[String, String] = Map(
       "bootstrap.servers" -> "localhost:9092",
-      "acks": -> "all",
+      "acks" -> "all",
       "key.serializer" -> "org.apache.kafka.common.serialization.StringSerializer",
       "value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer"
     )
-    val properties = new Properties()
+    val properties = new Properties
     scalaMap.foreach(case(k,v) => properties.put(k,v))
     
     val producer = new KafkaProducer[String, String](properties)

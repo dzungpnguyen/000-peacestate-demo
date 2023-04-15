@@ -5,10 +5,10 @@ import java.util.Collections.singletonList
 import scala.collection.JavaConverters._
 import scala.io.AnsiColor._
 import orf.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
-import com.project.peacestate.model.Citizen
-import com.project.peacestate.utility.Utils
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.fs.{FileSystem, Path, FSDataOutputStream}
 
-object ConsumerAlert {
+object ConsumerStorage {
   def main(arg: Array[String]): Unit = {
     val topic = "drone-report"
     val brokers = "localhost:9092"
@@ -24,15 +24,20 @@ object ConsumerAlert {
     val consumer = new KafkaConsumer[String, String](properties)
     consumer.subscribe(singletonList(topic))
 
+    val conf = new Configuration
+    val hdfsUri = "hdfs://localhost:8020"
+    conf.set("fs.defaultFS", hdfsUri)
+    val fs = FileSystem.get(conf)
+
     while (true) {
       val records: ConsumerRecords[String, String] = consumer.poll(5)
       records.foreach(record => {
-        val droneReport = Utils.fromJson(record.value)
-        println(s"Received report: ${record.value}")
-        droneReport.citizens.foreach(citizen => citizen match {
-          case Citizen(name, peacescore) if peacescore < 30 => println(s"${RED}ALERT: $name's peace score is lower than 30!!!${RESET}")
-          case _ => // do nothing
-        })
+        val storagePath = new Path("/drone-report/reports.json")
+        val output: FSDataOutputStream = fs.create(path, true)
+        // output.write(record.value.getBytes)
+        output.write(record.value.getBytes("UTF-8"))
+        output.write("\n".getBytes("UTF-8"))
+        output.close()
       })
     }
   }
