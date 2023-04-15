@@ -2,7 +2,7 @@ package com.project.peacestate.service
 
 import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord, ProducerConfig}
-import org.apache.kafka.common.serialization.StringSerialization
+import org.apache.kafka.common.serialization.StringSerializer
 import com.project.peacestate.model.DroneReport
 import com.project.peacestate.utility.Utils
 
