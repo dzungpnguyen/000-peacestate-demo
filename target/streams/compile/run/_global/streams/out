@@ -1,0 +1,59 @@
+[0m[[0m[31merror[0m] [0m[0morg.apache.spark.sql.streaming.StreamingQueryException: Text data source supports only a single column, and you have 2 columns.[0m
+[0m[[0m[31merror[0m] [0m[0m=== Streaming Query ===[0m
+[0m[[0m[31merror[0m] [0m[0mIdentifier: [id = 701d72ff-c57d-41b5-8483-fce61b6cf65e, runId = 1f4930d0-e9ef-4334-8bdd-78db2468375a][0m
+[0m[[0m[31merror[0m] [0m[0mCurrent Committed Offsets: {}[0m
+[0m[[0m[31merror[0m] [0m[0mCurrent Available Offsets: {KafkaV2[Subscribe[drone-messages]]: {"drone-messages":{"0":0}}}[0m
+[0m[[0m[31merror[0m] [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0mCurrent State: ACTIVE[0m
+[0m[[0m[31merror[0m] [0m[0mThread State: RUNNABLE[0m
+[0m[[0m[31merror[0m] [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0mLogical Plan:[0m
+[0m[[0m[31merror[0m] [0m[0mProject [data#21.messageId AS messageId#23, data#21.nom AS nom#24][0m
+[0m[[0m[31merror[0m] [0m[0m+- Project [from_json(StructField(messageId,StringType,true), StructField(nom,StringType,true), cast(value#8 as string), Some(Europe/Paris)) AS data#21][0m
+[0m[[0m[31merror[0m] [0m[0m   +- StreamingDataSourceV2Relation [key#7, value#8, topic#9, partition#10, offset#11L, timestamp#12, timestampType#13], org.apache.spark.sql.kafka010.KafkaSourceProvider$KafkaScan@20a1686d, KafkaV2[Subscribe[drone-messages]][0m
+[0m[[0m[31merror[0m] [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:325)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:209)[0m
+[0m[[0m[31merror[0m] [0m[0mCaused by: org.apache.spark.sql.AnalysisException: Text data source supports only a single column, and you have 2 columns.[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.errors.QueryCompilationErrors$.textDataSourceWithMultiColumnsError(QueryCompilationErrors.scala:2110)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.datasources.text.TextFileFormat.verifySchema(TextFileFormat.scala:48)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.datasources.text.TextFileFormat.prepareWrite(TextFileFormat.scala:70)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:142)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.FileStreamSink.addBatch(FileStreamSink.scala:181)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runBatch$17(MicroBatchExecution.scala:600)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$5(SQLExecution.scala:103)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:163)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:90)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:775)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:64)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runBatch$16(MicroBatchExecution.scala:598)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken(ProgressReporter.scala:375)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken$(ProgressReporter.scala:373)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:69)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runBatch(MicroBatchExecution.scala:598)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runActivatedStream$2(MicroBatchExecution.scala:228)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken(ProgressReporter.scala:375)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken$(ProgressReporter.scala:373)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:69)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runActivatedStream$1(MicroBatchExecution.scala:193)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.ProcessingTimeExecutor.execute(TriggerExecutor.scala:57)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runActivatedStream(MicroBatchExecution.scala:187)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution.$anonfun$runStream$1(StreamExecution.scala:303)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:775)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:286)[0m
+[0m[[0m[31merror[0m] [0m[0m	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:209)[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) org.apache.spark.sql.streaming.StreamingQueryException: Text data source supports only a single column, and you have 2 columns.[0m
+[0m[[0m[31merror[0m] [0m[0m=== Streaming Query ===[0m
+[0m[[0m[31merror[0m] [0m[0mIdentifier: [id = 701d72ff-c57d-41b5-8483-fce61b6cf65e, runId = 1f4930d0-e9ef-4334-8bdd-78db2468375a][0m
+[0m[[0m[31merror[0m] [0m[0mCurrent Committed Offsets: {}[0m
+[0m[[0m[31merror[0m] [0m[0mCurrent Available Offsets: {KafkaV2[Subscribe[drone-messages]]: {"drone-messages":{"0":0}}}[0m
+[0m[[0m[31merror[0m] [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0mCurrent State: ACTIVE[0m
+[0m[[0m[31merror[0m] [0m[0mThread State: RUNNABLE[0m
+[0m[[0m[31merror[0m] [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0mLogical Plan:[0m
+[0m[[0m[31merror[0m] [0m[0mProject [data#21.messageId AS messageId#23, data#21.nom AS nom#24][0m
+[0m[[0m[31merror[0m] [0m[0m+- Project [from_json(StructField(messageId,StringType,true), StructField(nom,StringType,true), cast(value#8 as string), Some(Europe/Paris)) AS data#21][0m
+[0m[[0m[31merror[0m] [0m[0m   +- StreamingDataSourceV2Relation [key#7, value#8, topic#9, partition#10, offset#11L, timestamp#12, timestampType#13], org.apache.spark.sql.kafka010.KafkaSourceProvider$KafkaScan@20a1686d, KafkaV2[Subscribe[drone-messages]][0m
