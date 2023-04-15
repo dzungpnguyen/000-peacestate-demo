@@ -1,7 +1,7 @@
 package com.project.peacestate.model
 
 final case class DroneReport (
-    id: Int, // or String
+    droneId: Int, // or String
     latitude: Double,
     longitude: Double,
     citizens: List[Citizen],
