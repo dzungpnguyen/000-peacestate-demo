@@ -27,8 +27,8 @@ object Producer {
       DroneReport(4, 0.0, 0.0, List(), List()),
       DroneReport(5, 0.0, 0.0, List(), List()),
     )
-    val names = List["Ally", "Broussole", "Cody", "Dan", "Enzo", "Fungus", "Gordon", "Hema", "Ian", "Jack"]
-    val words = List["Knife", "Lower", "Morning", "Nothing", "Operation", "Peace", "Qatar", "Robber", "Silly", "Thanks"]
+    val names = List("Ally", "Broussole", "Cody", "Dan", "Enzo", "Fungus", "Gordon", "Hema", "Ian", "Jack")
+    val words = List("Knife", "Lower", "Morning", "Nothing", "Operation", "Peace", "Qatar", "Robber", "Silly", "Thanks")
 
     while (true) {
       droneReports.map(droneReport => Utils.generateReport(droneReport.droneId, names, words))
