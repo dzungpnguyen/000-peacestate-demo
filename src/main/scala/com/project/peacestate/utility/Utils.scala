@@ -1,6 +1,6 @@
 package com.project.peacestate.utility
 
-import com.google.gson.gson
+import com.google.gson.Gson
 import scala.util.Random
 import com.project.peacestate.model.{DroneReport, Citizen}
 
